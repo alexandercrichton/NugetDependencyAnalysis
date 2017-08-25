@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Moq;
 using NugetDependencyAnalysis.Comparing;
 using NugetDependencyAnalysis.Parsing;
-using Serilog;
 using Xunit;
 
 namespace NugetDependencyAnalysisTests.Comparing
@@ -12,7 +10,6 @@ namespace NugetDependencyAnalysisTests.Comparing
     {
         public ProjectsNugetsComparerTests()
         {
-            var mockLogger = new Mock<ILogger>();
             Target = new ProjectsNugetsComparer();
         }
         

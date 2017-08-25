@@ -35,6 +35,7 @@ namespace NugetDependencyAnalysis.Comparing
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;

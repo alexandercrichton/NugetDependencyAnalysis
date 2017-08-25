@@ -8,7 +8,11 @@ namespace NugetDependencyAnalysis.Comparing
     {
         public IReadOnlyList<NugetDifferences> Compare(IEnumerable<ProjectNugetsGrouping> projects)
         {
-            IEnumerable<(string projectName, NugetPackage nuget)> nugets = projects.SelectMany(project => project.Nugets.Select(nuget => (project.ProjectName, nuget)));
+            var nugets = projects.SelectMany(project =>
+                project.Nugets.Select(nuget =>
+                    (nuget: nuget, projectName: project.ProjectName)
+                )
+            );
 
             var nugetsGroupedByPackage = nugets.GroupBy(nugetAndProject => nugetAndProject.nuget.Name);
 
@@ -20,21 +24,25 @@ namespace NugetDependencyAnalysis.Comparing
                     continue;
                 }
 
-                var targetFrameworks = nugetsGrouping.GroupBy(nugetAndProject => nugetAndProject.nuget.TargetFramework)
-                        .ToList();
+                var targetFrameworks = nugetsGrouping
+                    .GroupBy(nugetAndProject => nugetAndProject.nuget.TargetFramework)
+                    .ToList();
                 var targetFrameworkDifferences = new List<TargetFrameworkProjectsGrouping>();
                 if (targetFrameworks.Count > 1)
                 {
-                    targetFrameworkDifferences = targetFrameworks.Select(item => new TargetFrameworkProjectsGrouping(item.Key, item.Select(i => i.projectName)))
+                    targetFrameworkDifferences = targetFrameworks
+                        .Select(item => new TargetFrameworkProjectsGrouping(item.Key, item.Select(i => i.projectName)))
                         .ToList();
                 }
 
-                var versions = nugetsGrouping.GroupBy(nugetAndProject => nugetAndProject.nuget.Version)
-                        .ToList();
+                var versions = nugetsGrouping
+                    .GroupBy(nugetAndProject => nugetAndProject.nuget.Version)
+                    .ToList();
                 var versionDifferences = new List<VersionProjectsGrouping>();
                 if (versions.Count > 1)
                 {
-                    versionDifferences = versionDifferences = versions.Select(item => new VersionProjectsGrouping(item.Key, item.Select(i => i.projectName)))
+                    versionDifferences = versions
+                        .Select(item => new VersionProjectsGrouping(item.Key, item.Select(i => i.projectName)))
                         .ToList();
                 }
 

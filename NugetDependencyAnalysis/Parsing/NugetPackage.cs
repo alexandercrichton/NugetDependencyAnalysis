@@ -11,11 +11,11 @@ namespace NugetDependencyAnalysis.Parsing
             TargetFramework = targetFramework;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        public string Version { get; private set; }
+        public string Version { get; }
 
-        public string TargetFramework { get; private set; }
+        public string TargetFramework { get; }
 
         public override bool Equals(object obj)
         {
@@ -23,6 +23,7 @@ namespace NugetDependencyAnalysis.Parsing
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
