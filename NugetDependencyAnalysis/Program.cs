@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NugetDependencyAnalysis.Analysis;
 using NugetDependencyAnalysis.Comparing;
 using NugetDependencyAnalysis.Finding;
 using NugetDependencyAnalysis.Parsing;
 using NugetDependencyAnalysis.Parsing.FileReading;
+using NugetDependencyAnalysis.Upgrading;
 using Serilog;
 
 namespace NugetDependencyAnalysis

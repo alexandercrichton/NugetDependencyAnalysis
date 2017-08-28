@@ -3,7 +3,7 @@ using System.Linq;
 using NugetDependencyAnalysis.Parsing;
 using Serilog;
 
-namespace NugetDependencyAnalysis.Analysis
+namespace NugetDependencyAnalysis.Upgrading
 {
     internal class ProjectDependencyUpgrader
     {

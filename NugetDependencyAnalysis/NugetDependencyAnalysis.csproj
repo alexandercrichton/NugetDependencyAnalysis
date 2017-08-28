@@ -55,7 +55,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\ProjectDependencyUpgrader.cs" />
+    <Compile Include="Upgrading\ProjectDependencyUpgrader.cs" />
     <Compile Include="Comparing\NugetDifferences.cs" />
     <Compile Include="Comparing\ProjectsNugetsComparer.cs" />
     <Compile Include="Comparing\TargetFrameworkProjectsGrouping.cs" />

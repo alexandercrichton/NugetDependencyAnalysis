@@ -74,7 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\ProjectDependencyUpgraderTests.cs" />
+    <Compile Include="Upgrading\ProjectDependencyUpgraderTests.cs" />
     <Compile Include="Comparing\ProjectsNugetsComparerTests.cs" />
     <Compile Include="Finding\ProjectPackagesFinderTests.cs" />
     <Compile Include="Parsing\ProjectPackagesParserTests.cs" />

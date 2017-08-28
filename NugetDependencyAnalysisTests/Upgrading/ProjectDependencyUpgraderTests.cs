@@ -2,12 +2,12 @@
 using System.Linq;
 using FluentAssertions;
 using Moq;
-using NugetDependencyAnalysis.Analysis;
 using NugetDependencyAnalysis.Parsing;
+using NugetDependencyAnalysis.Upgrading;
 using Serilog;
 using Xunit;
 
-namespace NugetDependencyAnalysisTests.Analysis
+namespace NugetDependencyAnalysisTests.Upgrading
 {
     public class ProjectDependencyUpgraderTests
     {
