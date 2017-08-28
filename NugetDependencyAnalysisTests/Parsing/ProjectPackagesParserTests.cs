@@ -9,7 +9,7 @@ using Xunit;
 
 namespace NugetDependencyAnalysisTests.Parsing
 {
-    public class PackagesConfigParserTests
+    public class ProjectPackagesParserTests
     {
         private const string ProjectName = "project";
 
@@ -34,19 +34,33 @@ namespace NugetDependencyAnalysisTests.Parsing
             }
         }
 
+        [Fact]
+        public void TestProjectWithoutPackagesFile()
+        {
+            var packagesConfigFile = new ProjectPackagesFile(ProjectName);
+
+            var target = new ProjectPackagesParser(Mock.Of<ILogger>(), Mock.Of<IFileReader>());
+
+            var actual = target.Parse(packagesConfigFile);
+
+            actual.ProjectName.Should().Be(ProjectName);
+            actual.Nugets.Should().BeEmpty();
+        }
+
         [Theory]
         [MemberData(nameof(Data))]
-        public void Tests(TestData testData)
+        public void TestProjectWithPackagesFile(TestData testData)
         {
-            var packagesConfigFile = new PackagesConfigFile("path", ProjectName);
+            var packagesConfigFile = new ProjectPackagesFile(ProjectName, "path");
 
-            var mockLogger = new Mock<ILogger>();
             var mockFileReader = new Mock<IFileReader>();
             mockFileReader
-                .Setup(fileReader => fileReader.ReadFileContents(It.Is<string>(value => value == packagesConfigFile.Path)))
+                .Setup(fileReader => fileReader.ReadFileContents(
+                    It.Is<string>(value => value == packagesConfigFile.PackagesFilePath)
+                ))
                 .Returns(testData.PackagesConfigContent);
 
-            var target = new PackagesConfigParser(mockLogger.Object, mockFileReader.Object);
+            var target = new ProjectPackagesParser(Mock.Of<ILogger>(), mockFileReader.Object);
 
             var actual = target.Parse(packagesConfigFile);
 

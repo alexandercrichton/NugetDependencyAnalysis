@@ -9,17 +9,12 @@ using Xunit;
 
 namespace NugetDependencyAnalysisTests.Finding
 {
-    public class PackagesConfigFinderTests
+    public class ProjectPackagesFinderTests
     {
-        public PackagesConfigFinderTests()
-        {
-            var mockLogger = new Mock<ILogger>();
-            Target = new PackagesConfigFinder(mockLogger.Object);
-        }
+        private static string TestDirectoriesLocation =>
+            Path.Combine(Environment.CurrentDirectory, @"Finding\_TestData");
 
-        private string TestDirectoriesLocation => Path.Combine(Environment.CurrentDirectory, @"Finding\_TestData");
-
-        private PackagesConfigFinder Target { get; }
+        private ProjectPackagesFinder Target { get; } = new ProjectPackagesFinder(Mock.Of<ILogger>());
 
         [Fact]
         public void Finds_PackagesConfig_In_Directory()
@@ -28,25 +23,32 @@ namespace NugetDependencyAnalysisTests.Finding
 
             var actual = Target.Find(testDirectory);
 
-            var expected = new List<PackagesConfigFile> {
-                new PackagesConfigFile(Path.Combine(TestDirectoriesLocation, @"SampleSolution\SampleProject\packages.config"), "SampleProject")
+            var expected = new List<ProjectPackagesFile> {
+                new ProjectPackagesFile(
+                    "SampleProject",
+                    Path.Combine(TestDirectoriesLocation, @"SampleSolution\SampleProject\packages.config")
+                )
             };
 
             actual.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Handles_Missing_Project_Files()
+        public void Handles_Missing_Packages_Files()
         {
-            var testDirectory = Path.Combine(TestDirectoriesLocation, "NoProjectFile");
+            var testDirectory = Path.Combine(TestDirectoriesLocation, "NoPackagesFile");
 
             var actual = Target.Find(testDirectory);
 
-            actual.Should().BeEmpty();
+            var expected = new List<ProjectPackagesFile> {
+                new ProjectPackagesFile("NoPackagesFile")
+            };
+
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Handles_Multiple_Project_Files()
+        public void Handles_Multiple_Project_Files_In_Directory()
         {
             var testDirectory = Path.Combine(TestDirectoriesLocation, "MultipleProjectFiles");
 

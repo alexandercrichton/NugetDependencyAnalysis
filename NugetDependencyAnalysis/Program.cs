@@ -96,10 +96,10 @@ namespace NugetDependencyAnalysis
 
         private static IEnumerable<ProjectNugetsGrouping> ParseProjectsFromDirectory(ILogger logger, string directory)
         {
-            var finder = new PackagesConfigFinder(logger);
+            var finder = new ProjectPackagesFinder(logger);
             var packagesConfigFiles = finder.Find(directory);
 
-            var parser = new PackagesConfigParser(logger, new FileReader());
+            var parser = new ProjectPackagesParser(logger, new FileReader());
             return packagesConfigFiles.Select(packagesConfigFile => parser.Parse(packagesConfigFile));
         }
 

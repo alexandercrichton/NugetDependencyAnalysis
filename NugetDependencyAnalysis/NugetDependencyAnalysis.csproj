@@ -63,9 +63,9 @@
     <Compile Include="Parsing\FileReading\FileReader.cs" />
     <Compile Include="Parsing\FileReading\IFileReader.cs" />
     <Compile Include="Parsing\NugetPackage.cs" />
-    <Compile Include="Finding\PackagesConfigFile.cs" />
-    <Compile Include="Finding\PackagesConfigFinder.cs" />
-    <Compile Include="Parsing\PackagesConfigParser.cs" />
+    <Compile Include="Finding\ProjectPackagesFile.cs" />
+    <Compile Include="Finding\ProjectPackagesFinder.cs" />
+    <Compile Include="Parsing\ProjectPackagesParser.cs" />
     <Compile Include="Parsing\ProjectNugetsGrouping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

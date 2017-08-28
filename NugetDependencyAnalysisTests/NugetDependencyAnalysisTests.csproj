@@ -76,8 +76,8 @@
   <ItemGroup>
     <Compile Include="Analysis\ProjectDependencyUpgraderTests.cs" />
     <Compile Include="Comparing\ProjectsNugetsComparerTests.cs" />
-    <Compile Include="Finding\PackagesConfigFinderTests.cs" />
-    <Compile Include="Parsing\PackagesConfigParserTests.cs" />
+    <Compile Include="Finding\ProjectPackagesFinderTests.cs" />
+    <Compile Include="Parsing\ProjectPackagesParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +85,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Finding\_TestData\MultipleProjectFiles\packages.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Finding\_TestData\NoProjectFile\packages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Finding\_TestData\SampleSolution\SampleProject\packages.config">
@@ -110,6 +107,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Finding\_TestData\MultipleProjectFiles\Project2.csproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Finding\_TestData\NoPackagesFile\NoPackagesFile.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
